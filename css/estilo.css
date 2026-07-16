@@ -271,15 +271,14 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 .hero_titulo {
   font-variation-settings: "wdth" 123;
   font-weight: 800;
-  font-size: clamp(3rem, 9.2vw, 7.6rem);
+  font-size: clamp(2.4rem, 6.6vw, 5.4rem);
   line-height: 0.94;
   text-transform: uppercase;
   letter-spacing: -0.018em;
-  margin-top: 1.4rem;
 }
 .hero_titulo .coma { color: var(--ambar); }
 .hero_rotador {
-  font-size: clamp(2.1rem, 5.6vw, 4.6rem);
+  font-size: clamp(1.7rem, 4.1vw, 3.4rem);
   line-height: 1.05;
   margin-top: 0.5rem;
   min-height: 1.2em;
@@ -333,7 +332,7 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 .evento { border-bottom: 1px solid var(--linea); }
 .evento_fila {
   display: grid;
-  grid-template-columns: 5.5rem 1fr auto 2rem;
+  grid-template-columns: 5.5rem 1fr auto;
   align-items: baseline;
   gap: 1.5rem;
   width: 100%;
@@ -354,22 +353,6 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 }
 .evento_frase { font-size: clamp(1rem, 2vw, 1.35rem); color: var(--crema-50); transition: color 0.3s; }
 .evento_fila:hover .evento_frase { color: var(--ambar); }
-.evento_mas {
-  font-weight: 300;
-  font-size: 1.6rem;
-  line-height: 1;
-  justify-self: end;
-  transition: transform 0.4s;
-}
-.evento.abierto .evento_mas { transform: rotate(45deg); }
-.evento_detalle {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.evento_detalle p { max-width: 42em; padding: 0 0 1.4rem 7rem; color: var(--crema-70); }
-.evento_detalle .evento_tags { padding-top: 0.2rem; color: var(--crema-50); }
-.evento.abierto .evento_detalle { max-height: 260px; }
 
 /* imagen flotante que sigue al cursor (solo desktop con hover) */
 .evento_preview {
@@ -389,15 +372,6 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 
 /* ── statement ───────────────────────────────── */
 .statement { text-align: center; position: relative; }
-.statement_parens {
-  font-variation-settings: "wdth" 100;
-  font-weight: 200;
-  font-size: clamp(4rem, 10vw, 8rem);
-  line-height: 1;
-  color: var(--ambar);
-  opacity: 0.55;
-  margin-bottom: 0.6rem;
-}
 .statement_texto {
   font-variation-settings: "wdth" 122;
   font-weight: 790;
@@ -414,6 +388,13 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   transition: opacity 0.5s ease;
 }
 .statement_texto .palabra.encendida { opacity: 1; }
+/* los paréntesis que envuelven la frase, en ámbar y peso ligero */
+.statement_texto .palabra:first-child,
+.statement_texto .palabra:last-child {
+  color: var(--ambar);
+  font-weight: 300;
+  font-variation-settings: "wdth" 100;
+}
 
 /* ── trabajos ────────────────────────────────── */
 .trabajos_grid {
@@ -641,9 +622,8 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 @media (max-width: 860px) {
   .nav_links, .nav_cta { display: none; }
   .nav_hamburguesa { display: flex; }
-  .evento_fila { grid-template-columns: 3.4rem 1fr 2rem; }
+  .evento_fila { grid-template-columns: 3.4rem 1fr; }
   .evento_frase { display: none; }
-  .evento_detalle p { padding-left: 0; }
   .evento_preview { display: none; }
   .trabajos_grid { grid-template-columns: 1fr; }
   .trabajo:nth-child(even) { transform: none; }

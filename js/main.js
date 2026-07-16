@@ -107,35 +107,22 @@ if (statement) {
   obsStatement.observe(statement);
 }
 
-// ── EVENTOS: acordeón + preview flotante ──────
+// ── EVENTOS: preview flotante al pasar el cursor ──
 const eventos = document.querySelectorAll(".evento");
 const preview = document.getElementById("evento-preview");
 const previewImg = preview.querySelector("img");
 const conHover = window.matchMedia("(hover: hover) and (min-width: 861px)").matches;
 
-eventos.forEach((evento) => {
-  const fila = evento.querySelector(".evento_fila");
-
-  fila.addEventListener("click", () => {
-    const abierto = evento.classList.contains("abierto");
-    eventos.forEach((e) => {
-      e.classList.remove("abierto");
-      e.querySelector(".evento_fila").setAttribute("aria-expanded", "false");
-    });
-    if (!abierto) {
-      evento.classList.add("abierto");
-      fila.setAttribute("aria-expanded", "true");
-    }
-  });
-
-  if (conHover) {
+if (conHover) {
+  eventos.forEach((evento) => {
+    const fila = evento.querySelector(".evento_fila");
     fila.addEventListener("mouseenter", () => {
       previewImg.src = evento.dataset.img;
       preview.classList.add("visible");
     });
     fila.addEventListener("mouseleave", () => preview.classList.remove("visible"));
-  }
-});
+  });
+}
 
 if (conHover) {
   window.addEventListener(
