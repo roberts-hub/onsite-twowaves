@@ -360,12 +360,14 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 .evento_frase { font-size: clamp(1rem, 2vw, 1.35rem); color: var(--crema-50); transition: color 0.3s; }
 .evento_fila:hover .evento_frase { color: var(--ambar); }
 
-/* imagen flotante que sigue al cursor (solo desktop con hover) */
+/* imagen/clip flotante que sigue al cursor (solo desktop con hover).
+   Los eventos con video le pasan la proporción del clip en --ar-caja,
+   así se ve como un cuadro de cine y no hay recorte. */
 .evento_preview {
   position: fixed;
   z-index: 60;
   width: min(24vw, 330px);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--ar-caja, 4 / 3);
   pointer-events: none;
   opacity: 0;
   transform: scale(0.92) rotate(-2deg);
@@ -375,6 +377,19 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 }
 .evento_preview.visible { opacity: 1; transform: scale(1) rotate(-2deg); }
 .evento_preview img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.04) brightness(0.92); }
+/* el clip entra encima de la imagen cuando ya está reproduciendo */
+.evento_preview_video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  filter: saturate(0.92) contrast(1.04) brightness(0.92);
+}
+.evento_preview_video.visible { opacity: 1; }
 
 /* ── statement ───────────────────────────────── */
 .statement { text-align: center; position: relative; }

@@ -1,31 +1,90 @@
 /* ═══════════════════════════════════════════════
    ONSITE — interacciones
-   Precarga · nav · rotador del hero · reveals ·
-   índice de eventos (preview + acordeón) · statement
+   Video de fondo · precarga · nav · rotador del
+   hero · reveals · índice de eventos · statement
    ═══════════════════════════════════════════════ */
 
 // ── VIDEO DEL HERO ────────────────────────────
-// PLACEHOLDER: cambiar el id por el video de eventos de ONSITE.
-// "aspecto" son las dimensiones reales del video (ancho x alto).
-const VIDEO_HERO = { id: "997119368", aspecto: "3840x1920" };
+// id de Vimeo, proporción real del video (ancho x alto) y segundo de arranque.
+// "MAURET & CARLOS" — boda, 1:47.
+const VIDEO_HERO = { id: "1210597438", aspecto: "1280x640", inicio: 10 };
 
 const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// ── VIMEO: utilidades ─────────────────────────
+function aVimeo(iframe, metodo, valor) {
+  try {
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ method: metodo, value: valor }), "*"
+    );
+  } catch (_) {}
+}
+
+/**
+ * Iframe de Vimeo en modo fondo: silencioso, en loop, sin controles.
+ * Si "conf.inicio" viene, el clip se queda en su tramo: cuando el loop
+ * regresa al segundo 0, lo devolvemos al arranque.
+ * "alArrancar" se llama la primera vez que hay imagen DENTRO del tramo,
+ * para no revelar los segundos que queremos saltarnos.
+ */
+function crearVideoFondo(conf, alArrancar) {
+  const iframe = document.createElement("iframe");
+  iframe.src =
+    "https://player.vimeo.com/video/" + conf.id +
+    "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1" +
+    (conf.inicio ? "#t=" + conf.inicio + "s" : "");
+  iframe.allow = "autoplay; fullscreen";
+  iframe.title = "";
+  iframe.tabIndex = -1;
+  iframe.setAttribute("aria-hidden", "true");
+
+  const inicio = conf.inicio || 0;
+  let arrancado = false;
+  let ultimoSalto = 0;
+
+  const saltarAlInicio = () => {
+    if (Date.now() - ultimoSalto < 600) return; // no encimar saltos en vuelo
+    ultimoSalto = Date.now();
+    aVimeo(iframe, "setCurrentTime", inicio);
+  };
+
+  window.addEventListener("message", (ev) => {
+    if (ev.source !== iframe.contentWindow) return;
+    let d;
+    try { d = JSON.parse(ev.data); } catch (_) { return; }
+    if (d.event !== "playProgress" || !d.data) return;
+
+    const s = d.data.seconds;
+    const duracion = d.data.duration;
+
+    // Damos la vuelta nosotros ANTES del final: si dejamos que Vimeo llegue
+    // al 0, alcanza a verse un parpadeo del arranque que queremos saltarnos.
+    if (inicio && duracion && s > duracion - 0.5) return saltarAlInicio();
+    // Red por si aun así regresó al 0.
+    if (inicio && s < inicio - 0.5) return saltarAlInicio();
+
+    if (!arrancado) {
+      arrancado = true;
+      if (alArrancar) alArrancar();
+    }
+  });
+
+  // el player solo manda eventos si se los pedimos
+  iframe.addEventListener("load", () => aVimeo(iframe, "addEventListener", "playProgress"));
+
+  return iframe;
+}
+
+// ── HERO: video de fondo ──────────────────────
 const heroFondo = document.querySelector("[data-hero-fondo]");
 
 if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
   const [w, h] = VIDEO_HERO.aspecto.split(/[x:]/).map(Number);
   const ar = w && h ? w / h : 16 / 9;
 
-  const iframe = document.createElement("iframe");
-  // Modo fondo de Vimeo: autoplay silencioso, en loop, sin controles ni pausa automática
-  iframe.src =
-    "https://player.vimeo.com/video/" + VIDEO_HERO.id +
-    "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
+  const iframe = crearVideoFondo(VIDEO_HERO, () => revelarHero());
   iframe.className = "hero_video";
-  iframe.allow = "autoplay; fullscreen";
-  iframe.title = "";
-  iframe.tabIndex = -1;
-  iframe.setAttribute("aria-hidden", "true");
+  // recorte tipo "cover": el iframe siempre sobra por un lado
   iframe.style.width = "max(100vw, calc(100svh * " + ar + "))";
   iframe.style.height = "max(100svh, calc(100vw / " + ar + "))";
 
@@ -33,7 +92,7 @@ if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
   // Al terminar el fundido se suelta la transición: un iframe a pantalla
   // completa con transición viva encarece cada repintado.
   let revelado = false;
-  const revelar = () => {
+  function revelarHero() {
     if (revelado) return;
     revelado = true;
     iframe.classList.add("visible");
@@ -41,49 +100,19 @@ if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
       iframe.style.transition = "none";
       document.querySelector(".hero").classList.add("video-listo");
     }, 1400);
-  };
+  }
 
-  const alMensaje = (ev) => {
-    if (ev.source !== iframe.contentWindow) return;
-    let d;
-    try { d = JSON.parse(ev.data); } catch (_) { return; }
-    if (d.event === "playProgress" || d.event === "timeupdate") {
-      revelar();
-      window.removeEventListener("message", alMensaje);
-    }
-  };
-  window.addEventListener("message", alMensaje);
-
-  iframe.addEventListener("load", () => {
-    try {
-      iframe.contentWindow.postMessage(
-        JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*"
-      );
-    } catch (_) {}
-  });
-
-  // Respaldo, aparte del "load": si los eventos de Vimeo no llegan, revela igual.
-  // Si la pestaña abrió en segundo plano el video no arranca y el navegador
-  // congela los timers, así que ahí esperamos a que se vea de verdad.
-  setTimeout(() => {
-    if (document.visibilityState === "visible") return revelar();
-    document.addEventListener("visibilitychange", function alVerse() {
-      if (document.visibilityState !== "visible") return;
-      document.removeEventListener("visibilitychange", alVerse);
-      setTimeout(revelar, 1500); // margen para que Vimeo arranque solo
-    });
-  }, 4000);
-
+  // Sin respaldo por tiempo a propósito: sólo revelamos cuando el player
+  // confirma que va corriendo DENTRO del tramo. En carga fría Vimeo puede
+  // tardar >8s, y revelar antes dejaría ver el iframe en negro o los
+  // segundos que queremos saltarnos. Si los eventos nunca llegan (pestaña
+  // en segundo plano, API bloqueada), se queda la imagen de respaldo, que
+  // es un cuadro del mismo film. En cuanto arranca, entra el video.
   heroFondo.appendChild(iframe);
 
   // Fuera de pantalla se pausa; al volver, sigue
   new IntersectionObserver(
-    (entradas) => {
-      if (!iframe.contentWindow) return;
-      iframe.contentWindow.postMessage(
-        JSON.stringify({ method: entradas[0].isIntersecting ? "play" : "pause" }), "*"
-      );
-    },
+    (entradas) => aVimeo(iframe, entradas[0].isIntersecting ? "play" : "pause"),
     { threshold: 0 }
   ).observe(heroFondo);
 }
@@ -192,23 +221,64 @@ if (statement) {
 }
 
 // ── EVENTOS: preview flotante al pasar el cursor ──
+// La imagen entra al instante; si el evento trae video (data-video), el clip
+// se reproduce encima en cuanto arranca y la caja toma su proporción.
 const eventos = document.querySelectorAll(".evento");
 const preview = document.getElementById("evento-preview");
 const previewImg = preview.querySelector("img");
 const conHover = window.matchMedia("(hover: hover) and (min-width: 861px)").matches;
 
 if (conHover) {
+  let videoPrev = null; // iframe del último evento con video
+  let idPrev = null;
+
+  const soltarVideo = () => {
+    if (!videoPrev) return;
+    videoPrev.classList.remove("visible");
+    aVimeo(videoPrev, "pause");
+  };
+
   eventos.forEach((evento) => {
     const fila = evento.querySelector(".evento_fila");
+
     fila.addEventListener("mouseenter", () => {
       previewImg.src = evento.dataset.img;
       preview.classList.add("visible");
-    });
-    fila.addEventListener("mouseleave", () => preview.classList.remove("visible"));
-  });
-}
 
-if (conHover) {
+      const id = evento.dataset.video;
+      if (!id) {
+        soltarVideo();
+        preview.style.removeProperty("--ar-caja");
+        return;
+      }
+
+      // la caja toma la proporción del video: se ve como cuadro de cine
+      const [vw, vh] = (evento.dataset.videoAspecto || "16x9").split(/[x:]/).map(Number);
+      preview.style.setProperty("--ar-caja", vw + " / " + vh);
+
+      if (idPrev === id) {
+        aVimeo(videoPrev, "play");
+        videoPrev.classList.add("visible");
+        return;
+      }
+      // se crea en el primer hover, no al cargar la página
+      if (videoPrev) videoPrev.remove();
+      const nuevo = crearVideoFondo(
+        { id: id, inicio: Number(evento.dataset.videoInicio) || 0 },
+        () => nuevo.classList.add("visible")
+      );
+      nuevo.className = "evento_preview_video";
+      preview.appendChild(nuevo);
+      videoPrev = nuevo;
+      idPrev = id;
+    });
+
+    fila.addEventListener("mouseleave", () => {
+      preview.classList.remove("visible");
+      soltarVideo();
+    });
+  });
+
   window.addEventListener(
     "mousemove",
     (e) => {
