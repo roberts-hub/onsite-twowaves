@@ -19,8 +19,10 @@
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link rel="preconnect" href="https://f.vimeocdn.com">
   <link rel="dns-prefetch" href="https://player.vimeo.com">
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=2">
+  <!-- Es lo primero que se ve del hero: que baje antes que fuentes y JS -->
+  <link rel="preload" as="image" href="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css?v=3">
 </head>
 <body class="cargando">
 
@@ -61,7 +63,7 @@
            (ver VIDEO_HERO en js/main.js).
            La imagen es el respaldo que se ve mientras carga. -->
       <div class="hero_fondo" data-hero-fondo aria-hidden="true">
-        <img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" alt="">
+        <img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" alt="" fetchpriority="high" decoding="async">
       </div>
       <div class="hero_contenido">
         <h1 class="hero_titulo revelar">
@@ -172,27 +174,27 @@
            que da https://vimeo.com/api/oembed.json?url=<link del video> -->
       <div class="trabajos_grid">
         <a class="trabajo revelar" href="https://vimeo.com/1210597438" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" alt="Still de la boda de Mauret y Carlos" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_640?region=us 640w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_960?region=us 960w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la boda de Mauret y Carlos" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Wedding — Mauret &amp; Carlos )</p>
         </a>
         <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us" alt="Still de la graduación de Medicina UAG" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_640?region=us 640w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_960?region=us 960w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la graduación de Medicina UAG" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Graduation — Med UAG )</p>
         </a>
         <a class="trabajo revelar" href="https://vimeo.com/1210601096" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us" alt="Still del Festival Internacional del Globo 2025" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_640?region=us 640w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_960?region=us 960w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still del Festival Internacional del Globo 2025" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Festival — Internacional del Globo 2025 )</p>
         </a>
         <a class="trabajo revelar" href="https://vimeo.com/924251635" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us" alt="Still de Majahuitas 2023" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us" srcset="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_640?region=us 640w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_960?region=us 960w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Majahuitas 2023" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Festival — Majahuitas 2023 )</p>
         </a>
         <a class="trabajo revelar" href="https://vimeo.com/997132154" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us" alt="Still de Mita Sounds 2024" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us" srcset="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_640?region=us 640w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_960?region=us 960w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Mita Sounds 2024" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Festival — Mita Sounds 2024 )</p>
         </a>
         <a class="trabajo revelar" href="https://vimeo.com/1135144526" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us" alt="Still de Ricardo Salinas 70 años" loading="lazy"></figure>
+          <figure><img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_640?region=us 640w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_960?region=us 960w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Ricardo Salinas 70 años" loading="lazy" decoding="async"></figure>
           <p class="etiqueta">( Social — Ricardo Salinas, 70 años )</p>
         </a>
       </div>

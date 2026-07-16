@@ -330,6 +330,8 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   width: max-content;
   animation: marquee 32s linear infinite;
 }
+/* fuera de pantalla se para: animarlo sin que nadie lo vea traba el scroll */
+.marquee.dormido .marquee_pista { animation-play-state: paused; }
 .marquee_pista span {
   font-family: var(--mono);
   font-size: 0.78rem;

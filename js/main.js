@@ -17,6 +17,16 @@ const TOPE_PRECARGA = 7000;
 
 const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Con ahorro de datos o red muy lenta no cargamos el video: son ~MB por
+// visita y en esas condiciones ni alcanzaría a arrancar. Queda el póster.
+const red = navigator.connection || {};
+const redLenta = red.saveData === true || /2g/.test(red.effectiveType || "");
+
+const heroFondo = document.querySelector("[data-hero-fondo]");
+// Una sola verdad: la usan el hero y la precarga. Si estuviera escrita dos
+// veces y divergieran, la precarga esperaría un video que nunca se creó.
+const conVideoHero = !!(heroFondo && VIDEO_HERO.id && !reducirMovimiento && !redLenta);
+
 // La precarga espera este aviso: "el hero ya tiene imagen en movimiento".
 const heroListo = { ok: false, avisar: null };
 function marcarHeroListo() {
@@ -90,9 +100,7 @@ function crearVideoFondo(conf, alArrancar) {
 }
 
 // ── HERO: video de fondo ──────────────────────
-const heroFondo = document.querySelector("[data-hero-fondo]");
-
-if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
+if (conVideoHero) {
   const [w, h] = VIDEO_HERO.aspecto.split(/[x:]/).map(Number);
   const ar = w && h ? w / h : 16 / 9;
 
@@ -149,8 +157,8 @@ function quitarPrecarga() {
   document.body.classList.remove("cargando");
 }
 
-// sin video (reduce-motion o sin id) no hay nada que esperar
-if (!(heroFondo && VIDEO_HERO.id && !reducirMovimiento)) marcarHeroListo();
+// sin video (reduce-motion, red lenta o sin id) no hay nada que esperar
+if (!conVideoHero) marcarHeroListo();
 
 const esperaHero = new Promise((listo) => {
   if (heroListo.ok) return listo();
@@ -182,6 +190,20 @@ document.querySelectorAll(".menu-movil a").forEach((a) =>
   })
 );
 
+// ── FUERA DE PANTALLA: dormir lo que se anima ──
+// Animar cosas que nadie ve traba el scroll, sobre todo en celular.
+const hero = document.querySelector(".hero");
+new IntersectionObserver(
+  (entradas) => hero.classList.toggle("dormido", !entradas[0].isIntersecting),
+  { threshold: 0 }
+).observe(hero);
+
+const marquee = document.querySelector(".marquee");
+new IntersectionObserver(
+  (entradas) => marquee.classList.toggle("dormido", !entradas[0].isIntersecting),
+  { threshold: 0 }
+).observe(marquee);
+
 // ── HERO: línea rotativa ──────────────────────
 const FRASES = [
   "your graduation.",
@@ -192,6 +214,8 @@ const FRASES = [
 const rotador = document.querySelector("[data-rotador]");
 let fraseIdx = 0;
 setInterval(() => {
+  // fuera de pantalla no tiene sentido repintar (y en celular cuesta)
+  if (hero.classList.contains("dormido")) return;
   rotador.classList.add("saliendo");
   setTimeout(() => {
     fraseIdx = (fraseIdx + 1) % FRASES.length;
@@ -201,13 +225,6 @@ setInterval(() => {
     setTimeout(() => rotador.classList.remove("entrando"), 600);
   }, 450);
 }, 3400);
-
-// ── HERO: pausar fondo fuera de pantalla ──────
-const hero = document.querySelector(".hero");
-new IntersectionObserver(
-  (entradas) => hero.classList.toggle("dormido", !entradas[0].isIntersecting),
-  { threshold: 0 }
-).observe(hero);
 
 // ── REVEALS ───────────────────────────────────
 const observador = new IntersectionObserver(
