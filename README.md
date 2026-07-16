@@ -20,9 +20,16 @@ La hoja **"Cotizaciones ONSITE"** ya está creada:
 https://docs.google.com/spreadsheets/d/15sXR6jsCXZCZwn4Mj2k9Q05GcB75tqwamgMU1Te5Fd8/edit
 
 Falta conectarla (5 min): abre la hoja → Extensiones → Apps Script → pega
-`apps-script/registro.gs` → Implementar como aplicación web ("Cualquier
+`apps-script/registro.gs` → **Ejecutar `configurarHoja`** (deja la hoja con
+encabezados y formato) → Implementar como aplicación web ("Cualquier
 persona") → copia la URL `/exec` → pégala en `js/form.js` → `SHEETS_ENDPOINT`.
 Los pasos detallados están dentro de `apps-script/registro.gs`.
+
+El formato de la hoja vive en `configurarHoja()`: encabezado negro con texto
+crema (los colores del sitio), fila fija, anchos por columna, bandas
+alternadas, `DETALLES` con texto ajustado, filtro, y una columna `ESTADO` con
+menú (Nuevo / Contactado / Cotizado / Cerrado / Perdido) donde "Nuevo" se
+resalta en ámbar. Es idempotente: puedes correrla cuando quieras.
 
 Mientras `SHEETS_ENDPOINT` esté vacío, el formulario abre WhatsApp con el
 resumen de respuestas — funciona desde el día uno.
