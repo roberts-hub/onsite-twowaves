@@ -5,16 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0a08">
   <title>ONSITE — Event Films & Photography by Two Waves</title>
-  <meta name="description" content="Transforming life's biggest moments into timeless stories. Tailored photography and videography for graduations, weddings, corporate and social events. Guadalajara, MX.">
+  <meta name="description" content="Transforming life's biggest moments into timeless stories. Tailored photography and videography for graduations, weddings, corporate events, festivals and celebrations. Guadalajara, MX.">
   <meta property="og:title" content="ONSITE — Event Films & Photography">
-  <meta property="og:description" content="Transforming life's biggest moments into timeless stories. Graduations, weddings, corporate & social events.">
+  <meta property="og:description" content="Transforming life's biggest moments into timeless stories. Graduations, weddings, corporate events, festivals & celebrations.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://onsite.twowaves.mx/">
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- El hero abre con video de Vimeo: adelantamos los handshakes para que
+       arranque antes (la precarga lo espera; ver js/main.js). -->
+  <link rel="preconnect" href="https://player.vimeo.com">
+  <link rel="preconnect" href="https://i.vimeocdn.com">
+  <link rel="preconnect" href="https://f.vimeocdn.com">
+  <link rel="dns-prefetch" href="https://player.vimeo.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=1">
+  <link rel="stylesheet" href="css/estilo.css?v=2">
 </head>
 <body class="cargando">
 
@@ -81,8 +87,8 @@
     <!-- ══════════ MARQUEE ══════════ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee_pista">
-        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Social )</span><span>( Concerts )</span><span>( Anything worth remembering )</span>
-        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Social )</span><span>( Concerts )</span><span>( Anything worth remembering )</span>
+        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
+        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
       </div>
     </div>
 
@@ -125,9 +131,24 @@
             <span class="evento_frase serif">launches, summits, brand nights</span>
           </div>
         </li>
-        <li class="evento" data-img="https://i.vimeocdn.com/video/2007514743-8e2cb9215b144f3867bc81d6f8e1d32a9c08cba017aef426ca9a28eafb801a8d-d_960?region=us">
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
+            data-video="1210601096"
+            data-video-aspecto="1280x641"
+            data-video-inicio="10">
           <div class="evento_fila">
             <span class="evento_num">( 04 )</span>
+            <span class="evento_nombre">Festivals</span>
+            <span class="evento_frase serif">thousands of people, one story</span>
+          </div>
+        </li>
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us"
+            data-video="1135144526"
+            data-video-aspecto="1280x540"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 05 )</span>
             <span class="evento_nombre">Social &amp; more</span>
             <span class="evento_frase serif">birthdays, showers, concerts…</span>
           </div>
@@ -157,6 +178,22 @@
         <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener">
           <figure><img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us" alt="Still de la graduación de Medicina UAG" loading="lazy"></figure>
           <p class="etiqueta">( Graduation — Med UAG )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1210601096" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us" alt="Still del Festival Internacional del Globo 2025" loading="lazy"></figure>
+          <p class="etiqueta">( Festival — Internacional del Globo 2025 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/924251635" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us" alt="Still de Majahuitas 2023" loading="lazy"></figure>
+          <p class="etiqueta">( Festival — Majahuitas 2023 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/997132154" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us" alt="Still de Mita Sounds 2024" loading="lazy"></figure>
+          <p class="etiqueta">( Festival — Mita Sounds 2024 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1135144526" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us" alt="Still de Ricardo Salinas 70 años" loading="lazy"></figure>
+          <p class="etiqueta">( Social — Ricardo Salinas, 70 años )</p>
         </a>
       </div>
       <p class="nota revelar">More on Instagram — <a href="https://www.instagram.com/onsite.tw/" target="_blank" rel="noopener">@onsite.tw</a></p>

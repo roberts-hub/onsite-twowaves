@@ -144,18 +144,26 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .precarga.fuera { opacity: 0; visibility: hidden; }
 /* El logo original, intacto: se revela del centro hacia afuera, así los
-   paréntesis entran al final sin deformar ni recomponer la marca. */
+   paréntesis entran al final sin deformar ni recomponer la marca.
+   Al terminar respira, porque la precarga se queda mientras el video del
+   hero arranca y un logo fijo varios segundos parece pantalla trabada. */
 .precarga_logo {
   width: min(340px, 62vw);
   height: auto;
   opacity: 0;
   clip-path: inset(0 50% 0 50%);
-  animation: logo-revela 1.5s cubic-bezier(0.5, 0, 0.15, 1) 0.25s forwards;
+  animation:
+    logo-revela 1.5s cubic-bezier(0.5, 0, 0.15, 1) 0.25s forwards,
+    logo-respira 2.4s ease-in-out 1.9s infinite;
 }
 @keyframes logo-revela {
   0% { opacity: 0; clip-path: inset(0 50% 0 50%); }
   18% { opacity: 1; }
   100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes logo-respira {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
 }
 
 /* ── navegación ──────────────────────────────── */
@@ -425,8 +433,9 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   margin-bottom: 2.6rem;
 }
 .trabajo { text-decoration: none; }
+/* 2:1 como los films: se ven casi sin recorte */
 .trabajo figure {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 0.8rem;

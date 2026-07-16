@@ -9,7 +9,21 @@
 // "MAURET & CARLOS" — boda, 1:47.
 const VIDEO_HERO = { id: "1210597438", aspecto: "1280x640", inicio: 10 };
 
+// Cuánto puede esperar la precarga a que el video arranque. El logo se
+// queda mientras tanto, así al levantarse el hero ya tiene movimiento.
+// El tope existe para no dejar a nadie viendo el logo si Vimeo va lento.
+const MIN_PRECARGA = 2000;  // lo que tarda la animación del logo
+const TOPE_PRECARGA = 7000;
+
 const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// La precarga espera este aviso: "el hero ya tiene imagen en movimiento".
+const heroListo = { ok: false, avisar: null };
+function marcarHeroListo() {
+  if (heroListo.ok) return;
+  heroListo.ok = true;
+  if (heroListo.avisar) heroListo.avisar();
+}
 
 // ── VIMEO: utilidades ─────────────────────────
 function aVimeo(iframe, metodo, valor) {
@@ -95,11 +109,15 @@ if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
   function revelarHero() {
     if (revelado) return;
     revelado = true;
+    // Si la precarga sigue arriba, el fundido no se vería: entra directo,
+    // así al levantarse el logo el video ya está a pantalla completa.
+    if (document.body.classList.contains("cargando")) iframe.style.transition = "none";
     iframe.classList.add("visible");
     setTimeout(() => {
       iframe.style.transition = "none";
       document.querySelector(".hero").classList.add("video-listo");
     }, 1400);
+    marcarHeroListo();
   }
 
   // Sin respaldo por tiempo a propósito: sólo revelamos cuando el player
@@ -118,18 +136,32 @@ if (heroFondo && VIDEO_HERO.id && !reducirMovimiento) {
 }
 
 // ── PRECARGA ──────────────────────────────────
+// Se queda mientras el video del hero arranca en segundo plano, para que al
+// levantarse ya haya imagen en movimiento y no un cuadro fijo. Nunca menos
+// de lo que dura la animación del logo, ni más que TOPE_PRECARGA: si Vimeo
+// va lento, se entra igual y el video se suma cuando llegue.
 const precarga = document.getElementById("precarga");
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    precarga.classList.add("fuera");
-    document.body.classList.remove("cargando");
-  }, 1600);
-});
-// red de seguridad por si "load" tarda demasiado (imágenes remotas)
-setTimeout(() => {
+const arrancoEn = Date.now();
+
+function quitarPrecarga() {
+  if (precarga.classList.contains("fuera")) return;
   precarga.classList.add("fuera");
   document.body.classList.remove("cargando");
-}, 4000);
+}
+
+// sin video (reduce-motion o sin id) no hay nada que esperar
+if (!(heroFondo && VIDEO_HERO.id && !reducirMovimiento)) marcarHeroListo();
+
+const esperaHero = new Promise((listo) => {
+  if (heroListo.ok) return listo();
+  heroListo.avisar = listo;
+});
+const topeEspera = new Promise((listo) => setTimeout(listo, TOPE_PRECARGA));
+
+Promise.race([esperaHero, topeEspera]).then(() => {
+  const falta = Math.max(0, MIN_PRECARGA - (Date.now() - arrancoEn));
+  setTimeout(quitarPrecarga, falta);
+});
 
 // ── NAV: fondo al hacer scroll ────────────────
 const nav = document.getElementById("nav");
