@@ -92,8 +92,13 @@
       <h2 class="titulo-seccion revelar">Every kind<br>of <span class="serif">event.</span></h2>
 
       <ul class="eventos_lista">
-        <!-- PLACEHOLDER: las imágenes data-img se cambian por stills reales de cada tipo de evento -->
-        <li class="evento" data-img="https://i.vimeocdn.com/video/2176700800-1ee2efadcb1d1380d45a1cbaa4988beae76afdb2118d4e42e25d53bd19a2944b-d_1280?region=us">
+        <!-- Los eventos con clip llevan data-video + data-video-aspecto + data-video-inicio.
+             Los que no tienen (PLACEHOLDER) usan una miniatura del portafolio Two Waves. -->
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
+            data-video="1210598661"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10">
           <div class="evento_fila">
             <span class="evento_num">( 01 )</span>
             <span class="evento_nombre">Graduations</span>
@@ -141,24 +146,17 @@
       <p class="etiqueta revelar">( Recent events )</p>
       <h2 class="titulo-seccion revelar">Stories we've<br><span class="serif">told lately.</span></h2>
 
-      <!-- PLACEHOLDER: miniaturas del portafolio Two Waves; cambiar href por los
-           links reales de Vimeo/YouTube de eventos ONSITE y las miniaturas por stills propios -->
+      <!-- Solo trabajo real: cada tarjeta apunta a su video y usa su propia
+           miniatura. Para sumar otro, copia un bloque con el link y el thumb
+           que da https://vimeo.com/api/oembed.json?url=<link del video> -->
       <div class="trabajos_grid">
-        <a class="trabajo revelar" href="https://vimeo.com/twowavesfilms" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2176700800-1ee2efadcb1d1380d45a1cbaa4988beae76afdb2118d4e42e25d53bd19a2944b-d_1280?region=us" alt="Event film still" loading="lazy"></figure>
-          <p class="etiqueta">( Wedding — Guadalajara )</p>
+        <a class="trabajo revelar" href="https://vimeo.com/1210597438" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" alt="Still de la boda de Mauret y Carlos" loading="lazy"></figure>
+          <p class="etiqueta">( Wedding — Mauret &amp; Carlos )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/twowavesfilms" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2092677014-7c3834b56c434b7e63d9cc315d1a01f27fef51436b0f1b909711fd697b393511-d_960?region=us" alt="Event film still" loading="lazy"></figure>
-          <p class="etiqueta">( Graduation — ITESO )</p>
-        </a>
-        <a class="trabajo revelar" href="https://vimeo.com/twowavesfilms" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/1765031643-e2af8148a5096f2e46dcfcf6ec1dff5de7a7072cf5fb32c7693c18ddbbf2a0b7-d_960?region=us" alt="Event film still" loading="lazy"></figure>
-          <p class="etiqueta">( Corporate — brand night )</p>
-        </a>
-        <a class="trabajo revelar" href="https://vimeo.com/twowavesfilms" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2110982172-7a16e0202a31b2cedc8f7cc93eb51bf8a1acf4b84b43330a614288ecce753496-d_960?region=us" alt="Event film still" loading="lazy"></figure>
-          <p class="etiqueta">( Social — private party )</p>
+        <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener">
+          <figure><img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us" alt="Still de la graduación de Medicina UAG" loading="lazy"></figure>
+          <p class="etiqueta">( Graduation — Med UAG )</p>
         </a>
       </div>
       <p class="nota revelar">More on Instagram — <a href="https://www.instagram.com/onsite.tw/" target="_blank" rel="noopener">@onsite.tw</a></p>

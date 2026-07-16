@@ -361,21 +361,21 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 .evento_fila:hover .evento_frase { color: var(--ambar); }
 
 /* imagen/clip flotante que sigue al cursor (solo desktop con hover).
-   Los eventos con video le pasan la proporción del clip en --ar-caja,
-   así se ve como un cuadro de cine y no hay recorte. */
+   Siempre horizontal y a nivel. Los eventos con video le pasan la
+   proporción del clip en --ar-caja, así se ve completo y sin recorte. */
 .evento_preview {
   position: fixed;
   z-index: 60;
-  width: min(24vw, 330px);
-  aspect-ratio: var(--ar-caja, 4 / 3);
+  width: min(26vw, 380px);
+  aspect-ratio: var(--ar-caja, 16 / 9);
   pointer-events: none;
   opacity: 0;
-  transform: scale(0.92) rotate(-2deg);
+  transform: scale(0.94);
   transition: opacity 0.3s, transform 0.3s;
   border-radius: 4px;
   overflow: hidden;
 }
-.evento_preview.visible { opacity: 1; transform: scale(1) rotate(-2deg); }
+.evento_preview.visible { opacity: 1; transform: scale(1); }
 .evento_preview img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.04) brightness(0.92); }
 /* el clip entra encima de la imagen cuando ya está reproduciendo */
 .evento_preview_video {

@@ -229,13 +229,16 @@ const previewImg = preview.querySelector("img");
 const conHover = window.matchMedia("(hover: hover) and (min-width: 861px)").matches;
 
 if (conHover) {
-  let videoPrev = null; // iframe del último evento con video
-  let idPrev = null;
+  // Un iframe por evento, guardado tras el primer hover: alternar entre
+  // eventos no debe recargar el player de Vimeo desde cero.
+  const videos = new Map(); // id → iframe
+  let activo = null;
 
-  const soltarVideo = () => {
-    if (!videoPrev) return;
-    videoPrev.classList.remove("visible");
-    aVimeo(videoPrev, "pause");
+  const apagar = () => {
+    if (!activo) return;
+    activo.classList.remove("visible");
+    aVimeo(activo, "pause");
+    activo = null;
   };
 
   eventos.forEach((evento) => {
@@ -247,35 +250,38 @@ if (conHover) {
 
       const id = evento.dataset.video;
       if (!id) {
-        soltarVideo();
+        apagar();
         preview.style.removeProperty("--ar-caja");
         return;
       }
 
-      // la caja toma la proporción del video: se ve como cuadro de cine
+      // la caja toma la proporción del clip: se ve completo, sin recorte
       const [vw, vh] = (evento.dataset.videoAspecto || "16x9").split(/[x:]/).map(Number);
       preview.style.setProperty("--ar-caja", vw + " / " + vh);
 
-      if (idPrev === id) {
-        aVimeo(videoPrev, "play");
-        videoPrev.classList.add("visible");
-        return;
+      let vid = videos.get(id);
+      if (vid && vid === activo) return;
+      apagar();
+
+      if (vid) {
+        aVimeo(vid, "play");
+        vid.classList.add("visible");
+      } else {
+        // se crea en el primer hover, no al cargar la página
+        vid = crearVideoFondo(
+          { id: id, inicio: Number(evento.dataset.videoInicio) || 0 },
+          () => vid.classList.add("visible")
+        );
+        vid.className = "evento_preview_video";
+        preview.appendChild(vid);
+        videos.set(id, vid);
       }
-      // se crea en el primer hover, no al cargar la página
-      if (videoPrev) videoPrev.remove();
-      const nuevo = crearVideoFondo(
-        { id: id, inicio: Number(evento.dataset.videoInicio) || 0 },
-        () => nuevo.classList.add("visible")
-      );
-      nuevo.className = "evento_preview_video";
-      preview.appendChild(nuevo);
-      videoPrev = nuevo;
-      idPrev = id;
+      activo = vid;
     });
 
     fila.addEventListener("mouseleave", () => {
       preview.classList.remove("visible");
-      soltarVideo();
+      apagar();
     });
   });
 
