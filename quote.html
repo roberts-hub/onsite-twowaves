@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0a08">
+  <title>Get a quote — ONSITE by Two Waves</title>
+  <meta name="description" content="Tell us about your event and get a tailored quote for photo and film coverage. We reply within 24 hours.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://onsite.twowaves.mx/quote.html">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css?v=1">
+</head>
+<body class="pagina-simple">
+
+  <!-- ══════════ NAVEGACIÓN MÍNIMA ══════════ -->
+  <header class="nav nav--simple">
+    <a class="nav_logo" href="index.html" aria-label="ONSITE — home">
+      <img src="img/wordmark-cream.png" alt="ONSITE">
+      <span class="nav_sello">by Two Waves</span>
+    </a>
+    <a class="enlace-flecha nav_atras" href="index.html"><span aria-hidden="true">←</span> Back</a>
+  </header>
+
+  <main class="quote" id="contenido">
+    <div class="quote_intro">
+      <p class="etiqueta">( Get a quote )</p>
+      <h1 class="quote_titulo">Tell us about<br><span class="serif">your event.</span></h1>
+      <p class="quote_sub">Six quick questions — about two minutes. We reply within 24 hours.</p>
+    </div>
+
+    <form class="flujo" id="form-cotiza" novalidate>
+      <div class="flujo_progreso" aria-hidden="true"><span class="flujo_fill"></span></div>
+
+      <div class="flujo_paso activa" data-paso>
+        <label for="c-nombre">Your name</label>
+        <input id="c-nombre" name="nombre" type="text" autocomplete="name" placeholder="Ana López" required>
+      </div>
+
+      <div class="flujo_paso" data-paso>
+        <span class="flujo_pregunta">What are we celebrating?</span>
+        <div class="chips" role="radiogroup" aria-label="Event type">
+          <label class="chip"><input type="radio" name="tipo" value="Graduation" required><span>Graduation</span></label>
+          <label class="chip"><input type="radio" name="tipo" value="Wedding"><span>Wedding</span></label>
+          <label class="chip"><input type="radio" name="tipo" value="Corporate"><span>Corporate</span></label>
+          <label class="chip"><input type="radio" name="tipo" value="Social"><span>Social</span></label>
+          <label class="chip"><input type="radio" name="tipo" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+
+      <div class="flujo_paso" data-paso>
+        <label for="c-fecha">When is it? <small>(estimate is fine)</small></label>
+        <input id="c-fecha" name="fecha" type="text" placeholder="e.g. Dec 12, 2026 — or 'not sure yet'" required>
+      </div>
+
+      <div class="flujo_paso" data-paso>
+        <label for="c-lugar">City &amp; venue</label>
+        <input id="c-lugar" name="lugar" type="text" placeholder="Guadalajara — Hacienda…" required>
+      </div>
+
+      <div class="flujo_paso" data-paso>
+        <label for="c-detalles">Anything else we should know? <small>(optional)</small></label>
+        <textarea id="c-detalles" name="detalles" rows="3" placeholder="Guests, schedule, ideas, references…"></textarea>
+      </div>
+
+      <div class="flujo_paso" data-paso>
+        <label for="c-email">Where do we reach you?</label>
+        <input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+        <input id="c-tel" name="telefono" type="tel" autocomplete="tel" placeholder="WhatsApp (optional)">
+      </div>
+
+      <div class="flujo_controles">
+        <button type="button" class="flujo_atras" aria-label="Previous step">←</button>
+        <button type="button" class="boton flujo_siguiente"><span class="paren">(</span> Next <span class="paren">)</span></button>
+        <button type="submit" class="boton flujo_enviar"><span class="paren">(</span> Send request <span class="paren">)</span></button>
+      </div>
+      <p class="flujo_estado" id="form-estado" role="status"></p>
+    </form>
+
+    <p class="quote_nota etiqueta">
+      Rather talk? <a href="https://wa.me/523331290485?text=Hi!%20I'd%20like%20a%20quote%20for%20my%20event" target="_blank" rel="noopener">WhatsApp us</a>
+      · <a href="mailto:contacto@twowaves.mx">contacto@twowaves.mx</a>
+    </p>
+  </main>
+
+  <!-- ══════════ MODAL GRACIAS ══════════ -->
+  <div class="modal" id="modal-gracias" role="dialog" aria-modal="true" aria-label="Request sent" hidden>
+    <div class="modal_caja">
+      <p class="etiqueta">( Request sent )</p>
+      <h3>See you <span class="serif">onsite.</span></h3>
+      <p>We got your details and will reply within 24 hours. Talk soon.</p>
+      <a class="boton" href="index.html"><span class="paren">(</span> Back to site <span class="paren">)</span></a>
+    </div>
+  </div>
+
+  <footer class="footer footer--simple">
+    <p class="footer_firma etiqueta">( ONSITE by Two Waves — Guadalajara, MX )</p>
+  </footer>
+
+  <script src="js/form.js"></script>
+</body>
+</html>

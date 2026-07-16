@@ -10,6 +10,7 @@
   <meta property="og:description" content="Transforming life's biggest moments into timeless stories. Graduations, weddings, corporate & social events.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://onsite.twowaves.mx/">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -17,13 +18,9 @@
 </head>
 <body class="cargando">
 
-  <!-- ══════════ PRECARGA: paréntesis que se abren ══════════ -->
+  <!-- ══════════ PRECARGA: el logo original se revela del centro hacia afuera ══════════ -->
   <div class="precarga" id="precarga" aria-hidden="true">
-    <div class="precarga_marca">
-      <span class="precarga_paren izq">(</span>
-      <span class="precarga_palabra">ONSITE</span>
-      <span class="precarga_paren der">)</span>
-    </div>
+    <img class="precarga_logo" src="img/logo-parens-cream.png" alt="">
   </div>
 
   <a class="saltar" href="#contenido">Skip to content</a>
@@ -39,7 +36,7 @@
       <a href="#work">Work</a>
       <a href="#process">Process</a>
     </nav>
-    <a class="boton nav_cta" href="#quote"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
+    <a class="boton nav_cta" href="quote.html"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
     <button class="nav_hamburguesa" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
   </header>
 
@@ -47,14 +44,16 @@
     <a href="#events">Events</a>
     <a href="#work">Work</a>
     <a href="#process">Process</a>
-    <a href="#quote">Get a quote</a>
+    <a href="quote.html">Get a quote</a>
   </div>
 
   <main id="contenido">
 
     <!-- ══════════ HERO ══════════ -->
     <section class="hero">
-      <div class="hero_fondo" aria-hidden="true">
+      <!-- El video arranca solo al entrar (ver VIDEO_HERO en js/main.js).
+           La imagen es el respaldo que se ve mientras carga. -->
+      <div class="hero_fondo" data-hero-fondo aria-hidden="true">
         <!-- PLACEHOLDER: cambiar por un still/clip propio de ONSITE -->
         <img src="https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us" alt="">
       </div>
@@ -70,8 +69,7 @@
           coverage for the days you'll want to live twice.
         </p>
         <div class="hero_acciones revelar">
-          <a class="boton grande" href="#quote"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
-          <a class="enlace-flecha" href="#events">What we cover <span aria-hidden="true">↓</span></a>
+          <a class="boton grande" href="quote.html"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
         </div>
       </div>
       <div class="hero_base">
@@ -183,71 +181,16 @@
       </ol>
     </section>
 
-    <!-- ══════════ COTIZACIÓN ══════════ -->
-    <section class="cotiza seccion" id="quote">
+    <!-- ══════════ CIERRE → PÁGINA DE COTIZACIÓN ══════════ -->
+    <section class="cierre seccion" id="quote">
       <p class="etiqueta revelar">( Get a quote )</p>
       <h2 class="titulo-seccion revelar">Planning<br><span class="serif">something?</span></h2>
-      <p class="cotiza_sub revelar">Tell us about it — we reply within 24 hours.</p>
-
-      <form class="flujo revelar" id="form-cotiza" novalidate>
-        <div class="flujo_progreso" aria-hidden="true"><span class="flujo_fill"></span></div>
-
-        <div class="flujo_paso activa" data-paso>
-          <label for="c-nombre">Your name</label>
-          <input id="c-nombre" name="nombre" type="text" autocomplete="name" placeholder="Ana López" required>
-        </div>
-
-        <div class="flujo_paso" data-paso>
-          <span class="flujo_pregunta">What are we celebrating?</span>
-          <div class="chips" role="radiogroup" aria-label="Event type">
-            <label class="chip"><input type="radio" name="tipo" value="Graduation" required><span>Graduation</span></label>
-            <label class="chip"><input type="radio" name="tipo" value="Wedding"><span>Wedding</span></label>
-            <label class="chip"><input type="radio" name="tipo" value="Corporate"><span>Corporate</span></label>
-            <label class="chip"><input type="radio" name="tipo" value="Social"><span>Social</span></label>
-            <label class="chip"><input type="radio" name="tipo" value="Other"><span>Other</span></label>
-          </div>
-        </div>
-
-        <div class="flujo_paso" data-paso>
-          <label for="c-fecha">When is it? <small>(estimate is fine)</small></label>
-          <input id="c-fecha" name="fecha" type="text" placeholder="e.g. Dec 12, 2026 — or 'not sure yet'" required>
-        </div>
-
-        <div class="flujo_paso" data-paso>
-          <label for="c-lugar">City &amp; venue</label>
-          <input id="c-lugar" name="lugar" type="text" placeholder="Guadalajara — Hacienda…" required>
-        </div>
-
-        <div class="flujo_paso" data-paso>
-          <label for="c-detalles">Anything else we should know? <small>(optional)</small></label>
-          <textarea id="c-detalles" name="detalles" rows="3" placeholder="Guests, schedule, ideas, references…"></textarea>
-        </div>
-
-        <div class="flujo_paso" data-paso>
-          <label for="c-email">Where do we reach you?</label>
-          <input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
-          <input id="c-tel" name="telefono" type="tel" autocomplete="tel" placeholder="WhatsApp (optional)">
-        </div>
-
-        <div class="flujo_controles">
-          <button type="button" class="flujo_atras" aria-label="Previous step">←</button>
-          <button type="button" class="boton flujo_siguiente"><span class="paren">(</span> Next <span class="paren">)</span></button>
-          <button type="submit" class="boton flujo_enviar"><span class="paren">(</span> Send request <span class="paren">)</span></button>
-        </div>
-        <p class="flujo_estado" id="form-estado" role="status"></p>
-      </form>
+      <p class="cierre_sub revelar">
+        Tell us about your event in a couple of minutes — we reply within 24 hours.
+      </p>
+      <a class="boton grande revelar" href="quote.html"><span class="paren">(</span> Start your quote <span class="paren">)</span></a>
     </section>
   </main>
-
-  <!-- ══════════ MODAL GRACIAS ══════════ -->
-  <div class="modal" id="modal-gracias" role="dialog" aria-modal="true" aria-label="Request sent" hidden>
-    <div class="modal_caja">
-      <p class="etiqueta">( Request sent )</p>
-      <h3>See you <span class="serif">onsite.</span></h3>
-      <p>We got your details and will reply within 24 hours. Talk soon.</p>
-      <button class="boton" data-cerrar-modal><span class="paren">(</span> Close <span class="paren">)</span></button>
-    </div>
-  </div>
 
   <!-- ══════════ WHATSAPP FLOTANTE ══════════ -->
   <a class="whats" href="https://wa.me/523331290485?text=Hi!%20I'd%20like%20a%20quote%20for%20my%20event%20(found%20you%20on%20onsite.twowaves.mx)" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
@@ -266,6 +209,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/form.js"></script>
 </body>
 </html>
