@@ -1,10 +1,9 @@
 /* ═══════════════════════════════════════════════
    COTIZACIÓN (quote.html) — flujo multi-paso, una
    pregunta a la vez → Google Sheets vía Apps Script.
-   Mismo patrón que el formulario de twowaves.mx:
-   POST con URLSearchParams y no-cors.
-   Sin endpoint configurado cae a WhatsApp con el
-   resumen, para no perder al cliente.
+   El envío NO es a ciegas: leemos la confirmación
+   del script y, si no quedó guardado, el resumen se
+   va por WhatsApp. Un lead nunca se pierde callado.
    ═══════════════════════════════════════════════ */
 
 // Pega aquí la URL del web app de Apps Script (termina en /exec).
@@ -97,40 +96,70 @@ form.addEventListener("submit", async (e) => {
 
   // Sin endpoint: abre WhatsApp con el resumen (el sitio sirve desde el día uno)
   if (!SHEETS_ENDPOINT) {
-    const texto = encodeURIComponent(
-      "Hi! I'd like a quote for my event:\n" +
-        "— Name: " + datos.nombre + "\n— Type: " + datos.tipo +
-        "\n— Date: " + datos.fecha + "\n— Place: " + datos.lugar +
-        "\n— Details: " + (datos.detalles || "-") + "\n— Email: " + datos.email +
-        (datos.telefono ? "\n— Phone: " + datos.telefono : "")
-    );
-    window.open("https://wa.me/" + WHATSAPP + "?text=" + texto, "_blank", "noopener");
+    aWhatsApp(datos);
     abrirModal();
     return;
   }
 
   enviando = true;
   estado.textContent = "Sending…";
-  try {
-    // no-cors: no leemos la respuesta, pero el POST llega y se procesa.
-    // El doPost guarda la fila y manda el aviso por correo.
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 10000);
-    await fetch(SHEETS_ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      signal: ctrl.signal,
-      body: new URLSearchParams(datos),
-    });
-    clearTimeout(t);
-  } catch (_) {
-    /* red lenta o caída: el POST pudo haber llegado igual; seguimos */
-  }
+
+  const resultado = await enviarAlSheet(datos);
   enviando = false;
-  form.reset();
-  mostrar(0, false);
+
+  if (resultado === "confirmado") {
+    form.reset();
+    mostrar(0, false);
+    abrirModal();
+    return;
+  }
+
+  // No pudimos confirmar que quedó guardado: no dejamos ir al cliente.
+  // Un contacto duplicado es mucho mejor que un lead perdido.
+  estado.textContent = "Couldn't reach us — opening WhatsApp…";
+  aWhatsApp(datos);
   abrirModal();
 });
+
+/**
+ * Manda la cotización al Apps Script y DEVUELVE SI QUEDÓ GUARDADA.
+ * Con URLSearchParams la petición es "simple" (sin preflight) y el web app
+ * responde con Access-Control-Allow-Origin: *, así que sí podemos leer el
+ * {"ok":true}. Con no-cors se enviaba a ciegas: si el script fallaba, el
+ * lead se perdía en silencio y el cliente veía "gracias".
+ * No reintentamos: un reintento tras un error que en realidad sí llegó
+ * duplicaría la fila.
+ */
+async function enviarAlSheet(datos) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 15000);
+  try {
+    const r = await fetch(SHEETS_ENDPOINT, {
+      method: "POST",
+      body: new URLSearchParams(datos),
+      redirect: "follow", // /exec redirige a googleusercontent
+      signal: ctrl.signal,
+    });
+    const txt = await r.text();
+    return /"ok"\s*:\s*true/.test(txt) ? "confirmado" : "rechazado";
+  } catch (_) {
+    return "sin-confirmar"; // pudo llegar o no; tratamos como no llegó
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+/** Red de seguridad: el resumen se va por WhatsApp y el lead no se pierde. */
+function aWhatsApp(d) {
+  const texto = encodeURIComponent(
+    "Hi! I'd like a quote for my event:\n" +
+      "— Name: " + d.nombre + "\n— Type: " + d.tipo +
+      "\n— Date: " + d.fecha + "\n— Place: " + d.lugar +
+      "\n— Details: " + (d.detalles || "-") + "\n— Email: " + d.email +
+      (d.telefono ? "\n— Phone: " + d.telefono : "")
+  );
+  window.open("https://wa.me/" + WHATSAPP + "?text=" + texto, "_blank", "noopener");
+}
 
 // ── MODAL ─────────────────────────────────────
 function abrirModal() {
