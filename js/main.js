@@ -6,8 +6,17 @@
 
 // ── VIDEO DEL HERO ────────────────────────────
 // id de Vimeo, proporción real del video (ancho x alto) y segundo de arranque.
-// "MAURET & CARLOS" — boda, 1:47.
-const VIDEO_HERO = { id: "1210597438", aspecto: "1280x640", inicio: 10 };
+// En celular vertical va otro film: uno de 2:1 a pantalla completa en un
+// teléfono deja ver solo el 23% del encuadre y obliga a renderizar un iframe
+// de 1688px sobre una pantalla de 390. El reel 9:16 se ve al 82% y pesa menos.
+// El póster del hero (index.html) cambia con la misma condición.
+const VIDEO_ESCRITORIO = { id: "1210597438", aspecto: "1280x640", inicio: 10 };  // MAURET & CARLOS — boda, 1:47
+// arranca en el 5: los primeros segundos traen el letrero de neón del festival
+// y no queremos otra marca detrás de nuestro titular
+const VIDEO_CELULAR = { id: "906462885", aspecto: "1280x2276", inicio: 5 };      // MITA SOUNDS 2023 — reel vertical, 0:24
+
+const celularVertical = window.matchMedia("(max-width: 860px) and (orientation: portrait)").matches;
+const VIDEO_HERO = celularVertical ? VIDEO_CELULAR : VIDEO_ESCRITORIO;
 
 // Cuánto puede esperar la precarga a que el video arranque. El logo se
 // queda mientras tanto, así al levantarse el hero ya tiene movimiento.

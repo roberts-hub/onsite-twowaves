@@ -243,6 +243,8 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   overflow: hidden;
 }
 .hero_fondo { position: absolute; inset: 0; z-index: -1; }
+/* el <picture> es solo el envoltorio que elige póster: que no estorbe al layout */
+.hero_fondo picture { display: contents; }
 .hero_fondo img {
   width: 100%;
   height: 100%;
