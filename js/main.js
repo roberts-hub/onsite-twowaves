@@ -278,6 +278,68 @@ if (statement) {
   obsStatement.observe(statement);
 }
 
+// ── REPRODUCTOR ───────────────────────────────
+// Los films abren aquí, no en Vimeo: mismo patrón que twowaves.mx.
+// El href a Vimeo del enlace queda como respaldo si el JS no carga.
+const repro = document.getElementById("reproductor");
+
+if (repro) {
+  const marco = repro.querySelector("[data-marco]");
+  const elTitulo = repro.querySelector("[data-repro-titulo]");
+  const elTipo = repro.querySelector("[data-repro-tipo]");
+  const elDesc = repro.querySelector("[data-repro-desc]");
+
+  // Nada debe seguir corriendo detrás del reproductor
+  const pausarFondo = (metodo) => {
+    document.querySelectorAll(".hero_video, .evento_preview_video").forEach((f) => aVimeo(f, metodo));
+  };
+
+  function abrirRepro(film) {
+    const [w, h] = (film.dataset.videoAspecto || "16x9").split(/[x:]/).map(Number);
+    marco.style.setProperty("--ar-film", w + " / " + h);
+    elTitulo.textContent = film.dataset.titulo || "";
+    elTipo.textContent = film.dataset.tipo || "—";
+    elDesc.textContent = film.dataset.desc || "";
+
+    // con controles y sonido: aquí sí se ve el film, no es un fondo
+    marco.innerHTML =
+      '<iframe src="https://player.vimeo.com/video/' + film.dataset.video +
+      '?autoplay=1&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" ' +
+      'allowfullscreen title="' + (film.dataset.titulo || "") + '"></iframe>';
+
+    pausarFondo("pause");
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("repro-abierto");
+    repro.showModal();
+  }
+
+  function cerrarRepro() {
+    repro.classList.add("cerrando");
+    setTimeout(() => {
+      marco.innerHTML = ""; // detiene la reproducción
+      repro.classList.remove("cerrando");
+      repro.close();
+      document.body.style.overflow = "";
+      document.body.classList.remove("repro-abierto");
+      pausarFondo("play");
+    }, 320);
+  }
+
+  document.addEventListener("click", (e) => {
+    const film = e.target.closest("[data-film]");
+    if (film && film.dataset.video) {
+      e.preventDefault();
+      return abrirRepro(film);
+    }
+    if (e.target.closest("[data-cerrar-repro]")) cerrarRepro();
+  });
+  // Esc
+  repro.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    cerrarRepro();
+  });
+}
+
 // ── EVENTOS: preview flotante al pasar el cursor ──
 // La imagen entra al instante; si el evento trae video (data-video), el clip
 // se reproduce encima en cuanto arranca y la caja toma su proporción.

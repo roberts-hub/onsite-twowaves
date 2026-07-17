@@ -26,7 +26,7 @@
   <link rel="preload" as="image" imagesrcset="https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_640?region=us 640w, https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_960?region=us 960w"
         imagesizes="100vw" media="(max-width: 860px) and (orientation: portrait)" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=4">
+  <link rel="stylesheet" href="css/estilo.css?v=6">
 </head>
 <body class="cargando">
 
@@ -138,7 +138,11 @@
             <span class="evento_frase serif">one day, every feeling</span>
           </div>
         </li>
-        <li class="evento" data-img="https://i.vimeocdn.com/video/2007514181-8e731991188557ff3d6c410e80001fee885e56ea280037e5619b5d79da06859b-d_960?region=us">
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us"
+            data-video="1210651474"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10">
           <div class="evento_fila">
             <span class="evento_num">( 03 )</span>
             <span class="evento_nombre">Corporate</span>
@@ -181,32 +185,87 @@
       <p class="etiqueta revelar">( Recent events )</p>
       <h2 class="titulo-seccion revelar">Stories we've<br><span class="serif">told lately.</span></h2>
 
-      <!-- Solo trabajo real: cada tarjeta apunta a su video y usa su propia
-           miniatura. Para sumar otro, copia un bloque con el link y el thumb
-           que da https://vimeo.com/api/oembed.json?url=<link del video> -->
+      <!-- Cada tarjeta abre el reproductor del sitio (ver MODAL en js/main.js).
+           El href a Vimeo queda como respaldo si el JS no carga.
+           Para sumar un film: copia un bloque y cambia id, thumb, aspecto,
+           título y tipo. El thumb y la proporción los da
+           https://vimeo.com/api/oembed.json?url=<link del video> -->
       <div class="trabajos_grid">
-        <a class="trabajo revelar" href="https://vimeo.com/1210597438" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_640?region=us 640w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_960?region=us 960w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la boda de Mauret y Carlos" loading="lazy" decoding="async"></figure>
+        <a class="trabajo revelar" href="https://vimeo.com/1210597438" target="_blank" rel="noopener"
+           data-film data-video="1210597438" data-video-aspecto="1280x640"
+           data-titulo="Mauret &amp; Carlos" data-tipo="Wedding" data-desc="Some stories are meant to be lived. Others are meant to be remembered forever.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_640?region=us 640w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_960?region=us 960w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la boda de Mauret y Carlos" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
           <p class="etiqueta">( Wedding — Mauret &amp; Carlos )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_640?region=us 640w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_960?region=us 960w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la graduación de Medicina UAG" loading="lazy" decoding="async"></figure>
-          <p class="etiqueta">( Graduation — Med UAG )</p>
+        <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener"
+           data-film data-video="1210598661" data-video-aspecto="1280x640"
+           data-titulo="Graduación Med UAG" data-tipo="Graduation">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_640?region=us 640w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_960?region=us 960w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la graduación de Medicina UAG" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Graduation — Graduación Med UAG )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/1210601096" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_640?region=us 640w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_960?region=us 960w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still del Festival Internacional del Globo 2025" loading="lazy" decoding="async"></figure>
-          <p class="etiqueta">( Festival — Internacional del Globo 2025 )</p>
+        <a class="trabajo revelar" href="https://vimeo.com/1210651474" target="_blank" rel="noopener"
+           data-film data-video="1210651474" data-video-aspecto="1280x640"
+           data-titulo="Aniversario Sheló Nabel 2025" data-tipo="Corporate" data-desc="A celebration years in the making, brought to life in one unforgettable destination. In 2025, Sheló Nabel gathered its community in Playa del Carmen to celebrate another chapter of its story.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_640?region=us 640w, https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_960?region=us 960w, https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still del aniversario de Sheló Nabel 2025" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Corporate — Aniversario Sheló Nabel 2025 )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/924251635" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us" srcset="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_640?region=us 640w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_960?region=us 960w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Majahuitas 2023" loading="lazy" decoding="async"></figure>
+        <a class="trabajo revelar" href="https://vimeo.com/1210601096" target="_blank" rel="noopener"
+           data-film data-video="1210601096" data-video-aspecto="1280x641"
+           data-titulo="Festival Internacional del Globo 2025" data-tipo="Festival" data-desc="For a few days, the sky became the stage. Thousands of people, hundreds of balloons, and a collection of moments that could only exist here.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_640?region=us 640w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_960?region=us 960w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still del Festival Internacional del Globo 2025" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Festival — Festival Internacional del Globo 2025 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/924251635" target="_blank" rel="noopener"
+           data-film data-video="924251635" data-video-aspecto="1280x545"
+           data-titulo="Majahuitas 2023" data-tipo="Festival">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_640?region=us 640w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_960?region=us 960w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Majahuitas 2023" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
           <p class="etiqueta">( Festival — Majahuitas 2023 )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/997132154" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us" srcset="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_640?region=us 640w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_960?region=us 960w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Mita Sounds 2024" loading="lazy" decoding="async"></figure>
+        <a class="trabajo revelar" href="https://vimeo.com/997132154" target="_blank" rel="noopener"
+           data-film data-video="997132154" data-video-aspecto="1280x649"
+           data-titulo="Mita Sounds 2024" data-tipo="Festival">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_640?region=us 640w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_960?region=us 960w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Mita Sounds 2024" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
           <p class="etiqueta">( Festival — Mita Sounds 2024 )</p>
         </a>
-        <a class="trabajo revelar" href="https://vimeo.com/1135144526" target="_blank" rel="noopener">
-          <figure><img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us" srcset="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_640?region=us 640w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_960?region=us 960w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us 1280w" sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Ricardo Salinas 70 años" loading="lazy" decoding="async"></figure>
+        <a class="trabajo revelar" href="https://vimeo.com/1135144526" target="_blank" rel="noopener"
+           data-film data-video="1135144526" data-video-aspecto="1280x540"
+           data-titulo="Ricardo Salinas, 70 años" data-tipo="Social">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_640?region=us 640w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_960?region=us 960w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Ricardo Salinas 70 años" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
           <p class="etiqueta">( Social — Ricardo Salinas, 70 años )</p>
         </a>
       </div>
@@ -246,6 +305,27 @@
       <a class="boton grande revelar" href="quote.html"><span class="paren">(</span> Start your quote <span class="paren">)</span></a>
     </section>
   </main>
+
+  <!-- ══════════ REPRODUCTOR ══════════ -->
+  <dialog class="reproductor" id="reproductor">
+    <div class="reproductor_fondo" data-cerrar-repro></div>
+    <div class="reproductor_contenido">
+      <button class="reproductor_cerrar" data-cerrar-repro><span class="paren">(</span> Close ✕ <span class="paren">)</span></button>
+      <div class="reproductor_caja">
+        <div class="reproductor_marco" data-marco></div>
+        <div class="reproductor_info">
+          <h3 class="reproductor_titulo" data-repro-titulo></h3>
+          <div class="reproductor_columnas">
+            <div class="reproductor_meta">
+              <span class="etiqueta">Event</span>
+              <span class="reproductor_tipo" data-repro-tipo></span>
+            </div>
+            <p class="reproductor_desc" data-repro-desc></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- ══════════ WHATSAPP FLOTANTE ══════════ -->
   <a class="whats" href="https://wa.me/523331290485?text=Hi!%20I'd%20like%20a%20quote%20for%20my%20event%20(found%20you%20on%20onsite.twowaves.mx)" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
