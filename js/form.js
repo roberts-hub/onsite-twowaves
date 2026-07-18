@@ -6,9 +6,9 @@
    va por WhatsApp. Un lead nunca se pierde callado.
    ═══════════════════════════════════════════════ */
 
-// Pega aquí la URL del web app de Apps Script (termina en /exec).
-// Ver apps-script/registro.gs para el código y los pasos.
-const SHEETS_ENDPOINT = "";
+// URL del web app de Apps Script (proyecto "ONSITE - cotizaciones", desplegado
+// como app web con acceso "Cualquiera"). Ver apps-script/registro.gs.
+const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYSs8jiqjHcdm_-yycCDLyLCxWZxP4MOOhCA5_Q505wW7fak9gwvJOPsWhEnluHbW31g/exec";
 
 const WHATSAPP = "523331290485";
 
