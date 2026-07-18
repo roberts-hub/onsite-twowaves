@@ -10,7 +10,11 @@
 // teléfono deja ver solo el 23% del encuadre y obliga a renderizar un iframe
 // de 1688px sobre una pantalla de 390. El reel 9:16 se ve al 82% y pesa menos.
 // El póster del hero (index.html) cambia con la misma condición.
-const VIDEO_ESCRITORIO = { id: "1210597438", aspecto: "1280x640", inicio: 10 };  // MAURET & CARLOS — boda, 1:47
+// inicio 0 A PROPÓSITO: para que arranque lo más rápido posible. Con un offset,
+// Vimeo empieza en 0, hay que ordenarle saltar y rebufferear ese punto — eso
+// suma segundos al primer cuadro. En 0 revela en cuanto reproduce, sin salto.
+// De paso el inicio del film es un rótulo elegante "A VISION BY TWO WAVES".
+const VIDEO_ESCRITORIO = { id: "1210597438", aspecto: "1280x640", inicio: 0 };   // MAURET & CARLOS — boda, 1:47
 // arranca en el 5: los primeros segundos traen el letrero de neón del festival
 // y no queremos otra marca detrás de nuestro titular
 const VIDEO_CELULAR = { id: "906462885", aspecto: "1280x2276", inicio: 5 };      // MITA SOUNDS 2023 — reel vertical, 0:24
