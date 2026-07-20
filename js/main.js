@@ -311,6 +311,10 @@ if (repro) {
       '?autoplay=1&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" ' +
       'allowfullscreen title="' + (film.dataset.titulo || "") + '"></iframe>';
 
+    // si venías de un evento, oculta el preview flotante que seguía al cursor
+    const flotante = document.getElementById("evento-preview");
+    if (flotante) flotante.classList.remove("visible");
+
     pausarFondo("pause");
     document.body.style.overflow = "hidden";
     document.body.classList.add("repro-abierto");

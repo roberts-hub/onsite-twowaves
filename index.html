@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0a08">
+  <meta name="theme-color" content="#070605">
   <title>ONSITE — Event Films & Photography by Two Waves</title>
   <meta name="description" content="Transforming life's biggest moments into timeless stories. Tailored photography and videography for graduations, weddings, corporate events, festivals and celebrations. Guadalajara, MX.">
   <meta property="og:title" content="ONSITE — Event Films & Photography">
@@ -26,7 +26,7 @@
   <link rel="preload" as="image" imagesrcset="https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_640?region=us 640w, https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_960?region=us 960w"
         imagesizes="100vw" media="(max-width: 860px) and (orientation: portrait)" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=10">
+  <link rel="stylesheet" href="css/estilo.css?v=11">
 </head>
 <body class="cargando">
 
@@ -101,8 +101,8 @@
     <!-- ══════════ MARQUEE ══════════ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee_pista">
-        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
-        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
+        <span>( Festivals )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Graduations )</span><span>( Social )</span><span>( Anything worth remembering )</span>
+        <span>( Festivals )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Graduations )</span><span>( Social )</span><span>( Anything worth remembering )</span>
       </div>
     </div>
 
@@ -112,59 +112,62 @@
       <h2 class="titulo-seccion revelar">Every kind<br>of <span class="serif">event.</span></h2>
 
       <ul class="eventos_lista">
-        <!-- Los eventos con clip llevan data-video + data-video-aspecto + data-video-inicio.
-             Los que no tienen (PLACEHOLDER) usan una miniatura del portafolio Two Waves. -->
-        <li class="evento"
-            data-img="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
-            data-video="1210598661"
-            data-video-aspecto="1280x640"
-            data-video-inicio="10">
+        <!-- Cada evento abre su film en el reproductor al hacer clic (data-film)
+             y muestra un preview al pasar el cursor (data-img + data-video). -->
+        <li class="evento" data-film
+            data-img="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
+            data-video="1210601096"
+            data-video-aspecto="1280x641"
+            data-video-inicio="10"
+            data-titulo="Festival Internacional del Globo 2025" data-tipo="Festival">
           <div class="evento_fila">
             <span class="evento_num">( 01 )</span>
-            <span class="evento_nombre">Graduations</span>
-            <span class="evento_frase serif">the day it all paid off</span>
+            <span class="evento_nombre">Festivals</span>
+            <span class="evento_frase serif">thousands of people, one story</span>
           </div>
         </li>
-        <!-- Weddings muestra el clip de "MAURET & CARLOS" al pasar el cursor.
-             Para darle video a otro evento: mismos tres data-video-*. -->
-        <li class="evento"
+        <li class="evento" data-film
             data-img="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us"
             data-video="1210597438"
             data-video-aspecto="1280x640"
-            data-video-inicio="10">
+            data-video-inicio="10"
+            data-titulo="Mauret &amp; Carlos" data-tipo="Wedding">
           <div class="evento_fila">
             <span class="evento_num">( 02 )</span>
             <span class="evento_nombre">Weddings</span>
             <span class="evento_frase serif">one day, every feeling</span>
           </div>
         </li>
-        <li class="evento"
+        <li class="evento" data-film
             data-img="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us"
             data-video="1210651474"
             data-video-aspecto="1280x640"
-            data-video-inicio="10">
+            data-video-inicio="10"
+            data-titulo="Aniversario Sheló Nabel 2025" data-tipo="Corporate">
           <div class="evento_fila">
             <span class="evento_num">( 03 )</span>
             <span class="evento_nombre">Corporate</span>
             <span class="evento_frase serif">launches, summits, brand nights</span>
           </div>
         </li>
-        <li class="evento"
-            data-img="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
-            data-video="1210601096"
-            data-video-aspecto="1280x641"
-            data-video-inicio="10">
+        <li class="evento" data-film
+            data-img="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
+            data-video="1210598661"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10"
+            data-titulo="Graduación Med UAG" data-tipo="Graduation">
           <div class="evento_fila">
             <span class="evento_num">( 04 )</span>
-            <span class="evento_nombre">Festivals</span>
-            <span class="evento_frase serif">thousands of people, one story</span>
+            <span class="evento_nombre">Graduations</span>
+            <span class="evento_frase serif">the day it all paid off</span>
           </div>
         </li>
-        <li class="evento"
+        <li class="evento" data-film
             data-img="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us"
             data-video="1135144526"
             data-video-aspecto="1280x540"
-            data-video-inicio="10">
+            data-video-inicio="10"
+            data-titulo="Ricardo Salinas, 70 años" data-tipo="Social">
           <div class="evento_fila">
             <span class="evento_num">( 05 )</span>
             <span class="evento_nombre">Social &amp; more</span>
@@ -348,12 +351,12 @@
     <img class="footer_logo" src="img/logo-parens-cream.png" alt="( ONSITE )">
     <div class="footer_links">
       <a href="https://www.instagram.com/onsite.tw/" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:contacto@twowaves.mx">contacto@twowaves.mx</a>
+      <a href="mailto:info@twowaves.mx">info@twowaves.mx</a>
       <a href="https://www.twowaves.mx" target="_blank" rel="noopener">A Two Waves company</a>
     </div>
     <p class="footer_firma etiqueta">( ONSITE by Two Waves — Guadalajara, MX )</p>
   </footer>
 
-  <script src="js/main.js?v=10"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>

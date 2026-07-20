@@ -5,8 +5,8 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-  --negro: #0b0a08;
-  --negro-2: #14110d;
+  --negro: #070605;
+  --negro-2: #100e0b;
   --crema: #f2ecdf;
   --crema-70: rgba(242, 236, 223, 0.7);
   --crema-50: rgba(242, 236, 223, 0.5);
@@ -178,7 +178,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
 }
 .nav.pegada {
-  background: rgba(11, 10, 8, 0.82);
+  background: rgba(7, 6, 5, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding-top: 0.75rem;
@@ -280,8 +280,8 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(11, 10, 8, 0.75) 100%),
-    linear-gradient(to bottom, rgba(11, 10, 8, 0.55), transparent 30%, transparent 62%, var(--negro) 100%);
+    radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(7, 6, 5, 0.75) 100%),
+    linear-gradient(to bottom, rgba(7, 6, 5, 0.55), transparent 30%, transparent 62%, var(--negro) 100%);
 }
 .hero_contenido { max-width: var(--ancho); margin: 0 auto; width: 100%; }
 .hero_titulo {
@@ -358,6 +358,7 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
   text-align: left;
   padding: 1.7rem 0;
   transition: padding 0.35s;
+  cursor: pointer; /* abre el film en el reproductor al hacer clic */
 }
 .evento_fila:hover { padding-left: 0.8rem; }
 .evento_num { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; color: var(--crema-50); }
@@ -473,7 +474,7 @@ body.menu-abierto .menu-movil { opacity: 1; visibility: visible; }
 .reproductor_fondo {
   position: fixed;
   inset: 0;
-  background: rgba(11, 10, 8, 0.92);
+  background: rgba(7, 6, 5, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   opacity: 0;
@@ -577,7 +578,7 @@ body.repro-abierto .whats { opacity: 0; pointer-events: none; }
   border: 1px solid rgba(242, 236, 223, 0.5);
   border-radius: 99px;
   backdrop-filter: blur(6px);
-  background: rgba(11, 10, 8, 0.35);
+  background: rgba(7, 6, 5, 0.35);
   opacity: 0;
   transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
   pointer-events: none;
@@ -737,7 +738,7 @@ body.repro-abierto .whats { opacity: 0; pointer-events: none; }
   z-index: 140;
   display: grid;
   place-items: center;
-  background: rgba(11, 10, 8, 0.85);
+  background: rgba(7, 6, 5, 0.85);
   backdrop-filter: blur(8px);
   padding: var(--margen);
 }
