@@ -141,13 +141,23 @@ if (conVideoHero) {
     marcarHeroListo();
   }
 
-  // Sin respaldo por tiempo a propósito: sólo revelamos cuando el player
-  // confirma que va corriendo DENTRO del tramo. En carga fría Vimeo puede
-  // tardar >8s, y revelar antes dejaría ver el iframe en negro o los
-  // segundos que queremos saltarnos. Si los eventos nunca llegan (pestaña
-  // en segundo plano, API bloqueada), se queda la imagen de respaldo, que
-  // es un cuadro del mismo film. En cuanto arranca, entra el video.
   heroFondo.appendChild(iframe);
+
+  // Respaldo por tiempo (igual que twowaves.mx): si los eventos del player
+  // no llegan a tiempo (visita fría, API lenta), revelamos igual a los 4s
+  // estando la pestaña visible, para que el hero no se quede clavado en el
+  // póster. Vimeo ya muestra el primer cuadro del film en el iframe, así que
+  // no se ve negro; y en cuanto confirma reproducción, ya estaba a la vista.
+  // Con arranque en frío esto baja el "se ve el video" de ~15s a ≤4s.
+  setTimeout(() => {
+    if (document.visibilityState === "visible") revelarHero();
+    else marcarHeroListo(); // pestaña oculta: suelta la precarga, revela al volver
+  }, 4000);
+  document.addEventListener("visibilitychange", function alVolver() {
+    if (document.visibilityState !== "visible") return;
+    document.removeEventListener("visibilitychange", alVolver);
+    revelarHero();
+  });
 
   // Fuera de pantalla se pausa; al volver, sigue
   new IntersectionObserver(
