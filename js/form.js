@@ -116,7 +116,7 @@ form.addEventListener("submit", async (e) => {
 
   // No pudimos confirmar que quedó guardado: no dejamos ir al cliente.
   // Un contacto duplicado es mucho mejor que un lead perdido.
-  estado.textContent = "Couldn't reach us — opening WhatsApp…";
+  estado.textContent = "Couldn't reach us, opening WhatsApp…";
   aWhatsApp(datos);
   abrirModal();
 });
@@ -153,10 +153,10 @@ async function enviarAlSheet(datos) {
 function aWhatsApp(d) {
   const texto = encodeURIComponent(
     "Hi! I'd like a quote for my event:\n" +
-      "— Name: " + d.nombre + "\n— Type: " + d.tipo +
-      "\n— Date: " + d.fecha + "\n— Place: " + d.lugar +
-      "\n— Details: " + (d.detalles || "-") + "\n— Email: " + d.email +
-      (d.telefono ? "\n— Phone: " + d.telefono : "")
+      "Name: " + d.nombre + "\nType: " + d.tipo +
+      "\nDate: " + d.fecha + "\nPlace: " + d.lugar +
+      "\nDetails: " + (d.detalles || "-") + "\nEmail: " + d.email +
+      (d.telefono ? "\nPhone: " + d.telefono : "")
   );
   window.open("https://wa.me/" + WHATSAPP + "?text=" + texto, "_blank", "noopener");
 }

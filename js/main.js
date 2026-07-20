@@ -302,7 +302,7 @@ if (repro) {
     const [w, h] = (film.dataset.videoAspecto || "16x9").split(/[x:]/).map(Number);
     marco.style.setProperty("--ar-film", w + " / " + h);
     elTitulo.textContent = film.dataset.titulo || "";
-    elTipo.textContent = film.dataset.tipo || "—";
+    elTipo.textContent = film.dataset.tipo || "";
     elDesc.textContent = film.dataset.desc || "";
 
     // con controles y sonido: aquí sí se ve el film, no es un fondo
